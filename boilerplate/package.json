@@ -1,0 +1,22 @@
+{
+  "name": "@sibchain/boilerpalte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "bcrypt": "1.0.2",
+    "body-parser": "1.15.1",
+    "connect-redis": "3.0.2",
+    "express": "4.13.4",
+    "express-handlebars": "3.0.0",
+    "express-session": "1.13.0",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0"
+  }
+}

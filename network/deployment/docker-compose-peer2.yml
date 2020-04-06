@@ -1,0 +1,48 @@
+
+version: '2'
+
+networks:
+    behave:
+
+services:
+    peer2.org1.example.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer2.org1.example.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer2.org1.example.com:7052
+            - CORE_PEER_ID=peer2.org1.example.com
+            - CORE_PEER_ADDRESS=peer2.org1.example.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=${CORE_PEER_GOSSIP_ORGLEADER_PEER2_ORG1}
+            - CORE_PEER_GOSSIP_USELEADERELECTION=${CORE_PEER_GOSSIP_USELEADERELECTION_PEER2_ORG1}
+            - CORE_PEER_LOCALMSPID=Org1MSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@org1.example.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@org1.example.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@org1.example.com/tls/client.key
+        volumes:
+            - ../crypto-config/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/org1.example.com/users:/var/hyperledger/users
+            - ../network-config/:/var/hyperledger/configs
+        extra_hosts:
+            - "orderer0.example.com:192.168.20.2"
+            - "orderer1.example.com:192.168.20.2"
+            - "orderer2.example.com:192.168.20.2"
+            - "ca.example.com:192.168.20.2"
+            - "peer0.org1.example.com:192.168.20.3"
+            - "peer1.org1.example.com:192.168.20.3"
+            - "peer3.org1.example.com:192.168.20.4"
+            - "peer4.org1.example.com:192.168.20.4"
+            - "peer5.org1.example.com:192.168.20.4"
+            - "peer6.org1.example.com:192.168.20.5"
+            - "peer7.org1.example.com:192.168.20.5"
+            - "peer8.org1.example.com:192.168.20.5"
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 9051:7051
+          - 9053:7053

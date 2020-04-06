@@ -1,0 +1,81 @@
+version: '2'
+
+networks:
+  sco_network:
+
+services:
+    peer1-scm:
+      container_name: peer1-scm
+      image: hyperledger/fabric-peer
+      environment:
+        - CORE_PEER_ID=peer1-scm
+        - CORE_PEER_ADDRESS=peer1-scm:7051
+        - CORE_PEER_LOCALMSPID=scmMSP
+        - CORE_PEER_MSPCONFIGPATH=/hyperledger/scm/peer1/msp
+        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=guide_fabric-ca
+        - FABRIC_LOGGING_SPEC=debug
+        - CORE_PEER_TLS_ENABLED=true
+        - CORE_PEER_TLS_CERT_FILE=/hyperledger/scm/peer1/tls-msp/signcerts/cert.pem
+        - CORE_PEER_TLS_KEY_FILE=/hyperledger/scm/peer1/tls-msp/keystore/key.pem
+        - CORE_PEER_TLS_ROOTCERT_FILE=/hyperledger/scm/peer1/tls-msp/tlscacerts/tls-192-168-20-2-7052.pem
+        - CORE_PEER_GOSSIP_USELEADERELECTION=true
+        - CORE_PEER_GOSSIP_ORGLEADER=false
+        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1-scm:7051
+        - CORE_PEER_GOSSIP_SKIPHANDSHAKE=true
+      working_dir: /opt/gopath/src/github.com/hyperledger/fabric/scm/peer1
+      volumes:
+        - /var/run:/host/var/run
+        - /hyperledger/scm/peer1:/hyperledger/scm/peer1
+      networks:
+        - sco_network
+    peer2-scm:
+      container_name: peer2-scm
+      image: hyperledger/fabric-peer
+      environment:
+        - CORE_PEER_ID=peer2-scm
+        - CORE_PEER_ADDRESS=peer2-scm:7051
+        - CORE_PEER_LOCALMSPID=scmMSP
+        - CORE_PEER_MSPCONFIGPATH=/hyperledger/scm/peer2/msp
+        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=guide_fabric-ca
+        - FABRIC_LOGGING_SPEC=debug
+        - CORE_PEER_TLS_ENABLED=true
+        - CORE_PEER_TLS_CERT_FILE=/hyperledger/scm/peer2/tls-msp/signcerts/cert.pem
+        - CORE_PEER_TLS_KEY_FILE=/hyperledger/scm/peer2/tls-msp/keystore/key.pem
+        - CORE_PEER_TLS_ROOTCERT_FILE=/hyperledger/scm/peer2/tls-msp/tlscacerts/tls-192-168-20-2-7052.pem
+        - CORE_PEER_GOSSIP_USELEADERELECTION=true
+        - CORE_PEER_GOSSIP_ORGLEADER=false
+        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2-scm:7051
+        - CORE_PEER_GOSSIP_SKIPHANDSHAKE=true
+      working_dir: /opt/gopath/src/github.com/hyperledger/fabric/scm/peer2
+      volumes:
+        - /var/run:/host/var/run
+        - /hyperledger/scm/peer2:/hyperledger/scm/peer2
+      networks:
+        - sco_network
+    peer3-scm:
+      container_name: peer3-scm
+      image: hyperledger/fabric-peer
+      environment:
+        - CORE_PEER_ID=peer3-scm
+        - CORE_PEER_ADDRESS=peer3-scm:7051
+        - CORE_PEER_LOCALMSPID=scmMSP
+        - CORE_PEER_MSPCONFIGPATH=/hyperledger/scm/peer3/msp
+        - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+        - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=guide_fabric-ca
+        - FABRIC_LOGGING_SPEC=debug
+        - CORE_PEER_TLS_ENABLED=true
+        - CORE_PEER_TLS_CERT_FILE=/hyperledger/scm/peer3/tls-msp/signcerts/cert.pem
+        - CORE_PEER_TLS_KEY_FILE=/hyperledger/scm/peer3/tls-msp/keystore/key.pem
+        - CORE_PEER_TLS_ROOTCERT_FILE=/hyperledger/scm/peer3/tls-msp/tlscacerts/tls-192-168-20-2-7052.pem
+        - CORE_PEER_GOSSIP_USELEADERELECTION=true
+        - CORE_PEER_GOSSIP_ORGLEADER=false
+        - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3-scm:7051
+        - CORE_PEER_GOSSIP_SKIPHANDSHAKE=true
+      working_dir: /opt/gopath/src/github.com/hyperledger/fabric/scm/peer3
+      volumes:
+        - /var/run:/host/var/run
+        - /hyperledger/scm/peer3:/hyperledger/scm/peer3
+      networks:
+        - sco_network
