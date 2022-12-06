@@ -13,7 +13,7 @@
     "bcrypt": "1.0.2",
     "body-parser": "1.15.1",
     "connect-redis": "3.0.2",
-    "express": "4.13.4",
+    "express": "4.17.3",
     "express-handlebars": "3.0.0",
     "express-session": "1.13.0",
     "passport": "0.3.2",
